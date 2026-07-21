@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Savithri Marati — QA Engineer | DevOps &amp; Cloud Infrastructure</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0F1419;
+    --bg-alt:#121820;
+    --surface:#161E27;
+    --surface-hover:#1B2530;
+    --border:#232D38;
+    --border-soft:#1B242E;
+    --text:#E7ECF1;
+    --text-dim:#8695A5;
+    --text-faint:#546272;
+    --accent:#F0A202;
+    --accent-soft:#F0A20222;
+    --pass:#3FB950;
+    --pass-soft:#3FB95022;
+    --mono:'IBM Plex Mono', ui-monospace, monospace;
+    --sans:'IBM Plex Sans', -apple-system, sans-serif;
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+
+  html{scroll-behavior:smooth;}
+
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--sans);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  a{color:inherit; text-decoration:none;}
+
+  .wrap{max-width:920px; margin:0 auto; padding:0 24px;}
+
+  /* ---------- NAV ---------- */
+  nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(15,20,25,0.88);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--border-soft);
+  }
+  nav .wrap{
+    display:flex; align-items:center; justify-content:space-between;
+    height:56px; max-width:920px;
+  }
+  .nav-brand{
+    font-family:var(--mono); font-size:13px; color:var(--accent);
+    white-space:nowrap;
+  }
+  .nav-links{
+    display:flex; gap:22px; list-style:none; flex-wrap:wrap;
+  }
+  .nav-links a{
+    font-family:var(--mono); font-size:12.5px; color:var(--text-dim);
+    letter-spacing:0.02em;
+    transition:color .15s ease;
+  }
+  .nav-links a:hover{color:var(--accent);}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    padding:88px 0 64px;
+    border-bottom:1px solid var(--border-soft);
+  }
+  .status-line{
+    display:flex; align-items:center; gap:8px;
+    font-family:var(--mono); font-size:12px; color:var(--pass);
+    margin-bottom:28px;
+    letter-spacing:0.03em;
+  }
+  .dot{
+    width:7px; height:7px; border-radius:50%;
+    background:var(--pass);
+    box-shadow:0 0 0 0 var(--pass-soft);
+    animation:pulse 2s infinite;
+  }
+  @keyframes pulse{
+    0%{box-shadow:0 0 0 0 rgba(63,185,80,0.5);}
+    70%{box-shadow:0 0 0 8px rgba(63,185,80,0);}
+    100%{box-shadow:0 0 0 0 rgba(63,185,80,0);}
+  }
+
+  .hero h1{
+    font-family:var(--sans); font-weight:700;
+    font-size:clamp(32px, 5vw, 46px);
+    letter-spacing:-0.01em;
+    margin-bottom:8px;
+  }
+  .hero .role{
+    font-family:var(--mono); font-size:15px;
+    color:var(--accent); margin-bottom:32px;
+  }
+
+  .terminal{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:8px;
+    overflow:hidden;
+    box-shadow:0 20px 60px -20px rgba(0,0,0,0.5);
+  }
+  .terminal-bar{
+    display:flex; align-items:center; gap:6px;
+    padding:10px 14px;
+    border-bottom:1px solid var(--border-soft);
+    background:var(--bg-alt);
+  }
+  .terminal-bar span{
+    width:10px; height:10px; border-radius:50%;
+    background:var(--border);
+  }
+  .terminal-body{
+    padding:22px 24px 26px;
+    font-family:var(--mono); font-size:13.5px;
+    color:var(--text-dim);
+  }
+  .terminal-body .line{
+    opacity:0; transform:translateY(4px);
+    animation:tline .5s ease forwards;
+    margin-bottom:10px;
+  }
+  .terminal-body .line:nth-child(1){animation-delay:.1s;}
+  .terminal-body .line:nth-child(2){animation-delay:.5s;}
+  .terminal-body .line:nth-child(3){animation-delay:.9s;}
+  .terminal-body .line:nth-child(4){animation-delay:1.3s;}
+  .terminal-body .line:nth-child(5){animation-delay:1.7s;}
+  .terminal-body .line:nth-child(6){animation-delay:2.1s;}
+  .terminal-body .line:nth-child(7){animation-delay:2.5s;}
+  @keyframes tline{to{opacity:1; transform:translateY(0);}}
+
+  .prompt{color:var(--accent);}
+  .out{color:var(--text);}
+  .cursor{
+    display:inline-block; width:8px; height:15px;
+    background:var(--accent); vertical-align:middle;
+    animation:blink 1s step-end infinite;
+    margin-left:2px;
+  }
+  @keyframes blink{50%{opacity:0;}}
+
+  .hero-ctas{margin-top:28px; display:flex; gap:12px; flex-wrap:wrap;}
+  .btn{
+    font-family:var(--mono); font-size:13px;
+    padding:11px 20px; border-radius:6px;
+    border:1px solid var(--border);
+    transition:all .15s ease;
+  }
+  .btn-primary{
+    background:var(--accent); color:#171106; border-color:var(--accent);
+    font-weight:600;
+  }
+  .btn-primary:hover{background:#ffb52e;}
+  .btn-secondary{color:var(--text-dim);}
+  .btn-secondary:hover{border-color:var(--text-dim); color:var(--text);}
+
+  /* ---------- SECTION SHARED ---------- */
+  section{padding:72px 0;}
+  section.divider{border-bottom:1px solid var(--border-soft);}
+  .eyebrow{
+    font-family:var(--mono); font-size:12px; color:var(--accent);
+    letter-spacing:0.08em; margin-bottom:10px;
+  }
+  h2{
+    font-size:26px; font-weight:700; margin-bottom:36px;
+    letter-spacing:-0.01em;
+  }
+  .lead{color:var(--text-dim); max-width:640px; margin-bottom:8px; font-size:15px;}
+
+  /* ---------- SKILLS ---------- */
+  .skill-grid{
+    display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));
+    gap:14px;
+  }
+  .skill-mod{
+    background:var(--surface); border:1px solid var(--border);
+    border-radius:8px; padding:18px 20px;
+    transition:border-color .15s ease, transform .15s ease;
+  }
+  .skill-mod:hover{border-color:var(--accent); transform:translateY(-2px);}
+  .skill-mod-title{
+    font-family:var(--mono); font-size:12px; color:var(--text-faint);
+    text-transform:uppercase; letter-spacing:0.06em; margin-bottom:12px;
+  }
+  .tag-list{display:flex; flex-wrap:wrap; gap:7px;}
+  .tag{
+    font-family:var(--mono); font-size:12px; color:var(--text-dim);
+    background:var(--bg-alt); border:1px solid var(--border-soft);
+    padding:4px 9px; border-radius:5px;
+  }
+
+  /* ---------- EXPERIENCE / PIPELINE ---------- */
+  .pipeline{position:relative; padding-left:28px;}
+  .pipeline::before{
+    content:''; position:absolute; left:5px; top:6px; bottom:6px;
+    width:1px; background:var(--border);
+  }
+  .stage{position:relative; margin-bottom:44px;}
+  .stage:last-child{margin-bottom:0;}
+  .stage-node{
+    position:absolute; left:-28px; top:4px;
+    width:11px; height:11px; border-radius:50%;
+    background:var(--bg); border:2px solid var(--accent);
+  }
+  .stage.current .stage-node{background:var(--pass); border-color:var(--pass);}
+  .stage-head{
+    display:flex; flex-wrap:wrap; align-items:baseline; gap:10px;
+    margin-bottom:4px;
+  }
+  .stage-role{font-size:17px; font-weight:600;}
+  .stage-tag{
+    font-family:var(--mono); font-size:11px;
+    background:var(--pass-soft); color:var(--pass);
+    padding:2px 8px; border-radius:4px;
+  }
+  .stage-meta{
+    font-family:var(--mono); font-size:12.5px; color:var(--text-faint);
+    margin-bottom:14px;
+  }
+  .stage ul{list-style:none;}
+  .stage li{
+    position:relative; padding-left:16px; margin-bottom:9px;
+    font-size:14.5px; color:var(--text-dim);
+  }
+  .stage li::before{
+    content:'›'; position:absolute; left:0; color:var(--accent);
+    font-family:var(--mono);
+  }
+
+  /* ---------- PROJECTS ---------- */
+  .project-grid{
+    display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr));
+    gap:18px;
+  }
+  .project-card{
+    background:var(--surface); border:1px solid var(--border);
+    border-radius:10px; padding:22px 22px 20px;
+    transition:border-color .15s ease, transform .15s ease;
+  }
+  .project-card:hover{border-color:var(--accent); transform:translateY(-3px);}
+  .project-title{font-size:16px; font-weight:600; margin-bottom:10px;}
+  .project-card ul{list-style:none; margin-bottom:14px;}
+  .project-card li{
+    position:relative; padding-left:15px; margin-bottom:7px;
+    font-size:13.5px; color:var(--text-dim); line-height:1.5;
+  }
+  .project-card li::before{
+    content:'›'; position:absolute; left:0; color:var(--accent);
+    font-family:var(--mono);
+  }
+  .project-tags{display:flex; flex-wrap:wrap; gap:6px; margin-top:14px;}
+  .project-tags .tag{font-size:11px; padding:3px 8px;}
+
+  /* ---------- EDUCATION ---------- */
+  .edu-card{
+    background:var(--surface); border:1px solid var(--border);
+    border-radius:8px; padding:22px 24px;
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px;
+  }
+  .edu-degree{font-size:15.5px; font-weight:600; margin-bottom:4px;}
+  .edu-school{color:var(--text-dim); font-size:14px;}
+  .edu-meta{
+    font-family:var(--mono); font-size:12.5px; color:var(--text-faint);
+    text-align:right;
+  }
+
+  /* ---------- CONTACT / FOOTER ---------- */
+  footer{padding:64px 0 40px;}
+  .contact-row{
+    display:flex; flex-wrap:wrap; gap:14px; margin:24px 0 40px;
+  }
+  .contact-link{
+    font-family:var(--mono); font-size:13px;
+    border:1px solid var(--border); border-radius:6px;
+    padding:10px 18px; color:var(--text-dim);
+    transition:all .15s ease;
+  }
+  .contact-link:hover{border-color:var(--accent); color:var(--accent);}
+  .status-bar{
+    border-top:1px solid var(--border-soft);
+    padding-top:20px;
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px;
+    font-family:var(--mono); font-size:11.5px; color:var(--text-faint);
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none !important; transition:none !important;}
+  }
+
+  @media (max-width:600px){
+    .hero{padding:64px 0 44px;}
+    section{padding:52px 0;}
+    .edu-card{flex-direction:column;}
+    .edu-meta{text-align:left;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="nav-brand">savithri@infra:~$</div>
+    <ul class="nav-links">
+      <li><a href="#about">about</a></li>
+      <li><a href="#skills">skills</a></li>
+      <li><a href="#experience">experience</a></li>
+      <li><a href="#projects">projects</a></li>
+      <li><a href="#education">education</a></li>
+      <li><a href="#contact">contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="status-line"><span class="dot"></span> STATUS: OPEN TO OPPORTUNITIES</div>
+    <h1>Savithri Marati</h1>
+    <div class="role">QA Engineer — DevOps &amp; Cloud Infrastructure (AWS)</div>
+
+    <div class="terminal">
+      <div class="terminal-bar"><span></span><span></span><span></span></div>
+      <div class="terminal-body">
+        <div class="line"><span class="prompt">$</span> whoami</div>
+        <div class="line"><span class="out">&gt; QA Engineer with 3y 5m across quality assurance and cloud/DevOps engineering on AWS</span></div>
+        <div class="line"><span class="prompt">$</span> cat impact.log</div>
+        <div class="line"><span class="out">&gt; cloud_cost_reduction ..... 20%</span></div>
+        <div class="line"><span class="out">&gt; mlops_cycle_time_cut ..... 60%</span></div>
+        <div class="line"><span class="out">&gt; pipelines_owned .......... Jenkins, GitHub Actions, Argo CD</span></div>
+        <div class="line"><span class="out">&gt; ready_for_next_role ...... true<span class="cursor"></span></span></div>
+      </div>
+    </div>
+
+    <div class="hero-ctas">
+      <a href="#projects" class="btn btn-primary">View Projects</a>
+      <a href="#contact" class="btn btn-secondary">Get in Touch</a>
+    </div>
+  </div>
+</header>
+
+<section class="divider" id="about">
+  <div class="wrap">
+    <div class="eyebrow">// ABOUT</div>
+    <h2>Professional Summary</h2>
+    <p class="lead">
+      QA Engineer with 3 years 5 months of experience spanning quality assurance and DevOps/cloud infrastructure
+      on AWS. I build CI/CD pipelines with Jenkins and GitHub Actions, provision infrastructure as code with
+      Terraform, and run Kubernetes (EKS) workloads in production. My QA work covers functional and regression
+      testing, and I use AI-assisted tooling (Claude with MCP) to speed up test case authoring. On the
+      infrastructure side, I run GitOps workflows with Argo CD and monitor systems with Prometheus and Grafana.
+      I've cut cloud spend by 20% through rightsizing and lifecycle policy work, reduced MLOps deployment cycle
+      time by 60%, and mentor junior engineers on CI/CD and cloud best practices.
+    </p>
+  </div>
+</section>
+
+<section class="divider" id="skills">
+  <div class="wrap">
+    <div class="eyebrow">// STACK</div>
+    <h2>Core Competencies</h2>
+    <div class="skill-grid">
+      <div class="skill-mod">
+        <div class="skill-mod-title">Cloud &amp; Infrastructure</div>
+        <div class="tag-list">
+          <span class="tag">AWS EC2</span><span class="tag">S3</span><span class="tag">IAM</span>
+          <span class="tag">VPC</span><span class="tag">RDS</span><span class="tag">Route 53</span>
+          <span class="tag">CloudWatch</span><span class="tag">Terraform</span><span class="tag">Docker</span>
+          <span class="tag">Kubernetes (EKS)</span><span class="tag">Helm</span><span class="tag">Ansible</span>
+        </div>
+      </div>
+      <div class="skill-mod">
+        <div class="skill-mod-title">CI/CD &amp; DevOps</div>
+        <div class="tag-list">
+          <span class="tag">Jenkins</span><span class="tag">GitHub Actions</span><span class="tag">Argo CD</span>
+          <span class="tag">GitOps</span><span class="tag">Git</span><span class="tag">GitFlow</span>
+          <span class="tag">IaC</span>
+        </div>
+      </div>
+      <div class="skill-mod">
+        <div class="skill-mod-title">QA &amp; Testing</div>
+        <div class="tag-list">
+          <span class="tag">Functional Testing</span><span class="tag">Regression Testing</span>
+          <span class="tag">Smoke Testing</span><span class="tag">Test Case Design</span>
+          <span class="tag">Defect Triage</span><span class="tag">AI-Assisted Testing (Claude, MCP)</span>
+        </div>
+      </div>
+      <div class="skill-mod">
+        <div class="skill-mod-title">MLOps</div>
+        <div class="tag-list">
+          <span class="tag">MLflow</span><span class="tag">DVC</span><span class="tag">KServe</span>
+          <span class="tag">Model Deployment</span><span class="tag">Continuous Training</span>
+        </div>
+      </div>
+      <div class="skill-mod">
+        <div class="skill-mod-title">Monitoring &amp; Logging</div>
+        <div class="tag-list">
+          <span class="tag">Prometheus</span><span class="tag">Grafana</span><span class="tag">EFK Stack</span>
+          <span class="tag">Dynatrace (exposure)</span><span class="tag">CloudWatch</span>
+        </div>
+      </div>
+      <div class="skill-mod">
+        <div class="skill-mod-title">Databases</div>
+        <div class="tag-list">
+          <span class="tag">MySQL</span><span class="tag">PostgreSQL</span><span class="tag">MongoDB</span><span class="tag">Redis</span>
+        </div>
+      </div>
+      <div class="skill-mod">
+        <div class="skill-mod-title">Scripting &amp; Security</div>
+        <div class="tag-list">
+          <span class="tag">Python</span><span class="tag">Bash</span><span class="tag">SonarQube</span>
+          <span class="tag">Trivy</span><span class="tag">IAM Least-Privilege</span>
+        </div>
+      </div>
+      <div class="skill-mod">
+        <div class="skill-mod-title">Additional Exposure</div>
+        <div class="tag-list">
+          <span class="tag">OpenShift</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="divider" id="experience">
+  <div class="wrap">
+    <div class="eyebrow">// PIPELINE</div>
+    <h2>Professional Experience</h2>
+    <div class="pipeline">
+      <div class="stage current">
+        <div class="stage-node"></div>
+        <div class="stage-head">
+          <span class="stage-role">Associate QA Engineer</span>
+          <span class="stage-tag">CURRENT</span>
+        </div>
+        <div class="stage-meta">ScleraVDMS Private Limited · Mangaluru, India · Apr 2024 – Present (2 yrs 4 mos)</div>
+        <ul>
+          <li>Ran functional, regression, and smoke testing on microservices before release, triaging defects with dev teams; used Claude with MCP to speed up regression test case authoring.</li>
+          <li>Built and maintained CI/CD pipelines with Jenkins and GitHub Actions, cutting manual deployment steps and increasing release frequency.</li>
+          <li>Provisioned AWS infrastructure (EC2, S3, RDS, IAM, VPC, EKS, Route 53, CloudWatch) with Terraform for repeatable, auditable deployments across dev, staging, and production.</li>
+          <li>Containerized microservices with Docker and deployed to AWS EKS supporting zero-downtime rolling updates, contributing to a monolith-to-microservices migration.</li>
+          <li>Implemented GitOps workflows with Argo CD for version-controlled deployments and faster incident rollback.</li>
+          <li>Cut cloud infrastructure costs by ~20% through EC2 rightsizing, S3 lifecycle policies, and Reserved Instance planning.</li>
+          <li>Built an end-to-end MLOps pipeline (MLflow, DVC, Docker, KServe), reducing model deployment cycle time by ~60%.</li>
+          <li>Built Prometheus/Grafana monitoring dashboards and maintained EFK centralized logging, improving P1/P2 incident response.</li>
+          <li>Automated infrastructure health checks with Bash and Python, and configured least-privilege IAM roles and security groups.</li>
+          <li>Managed Helm chart deployments, maintained Ansible playbooks, and mentored new team members on CI/CD and cloud practices.</li>
+        </ul>
+      </div>
+      <div class="stage">
+        <div class="stage-node"></div>
+        <div class="stage-head"><span class="stage-role">Junior System Engineer</span></div>
+        <div class="stage-meta">Access Research Labs (ARL) · Mangaluru, India · Mar 2023 – Mar 2024 (1 yr 1 mo)</div>
+        <ul>
+          <li>Managed and monitored Linux-based server infrastructure, ensuring stability and uptime across production and staging.</li>
+          <li>Assisted in provisioning AWS resources (EC2, S3, IAM) and supported initial Terraform-based automation.</li>
+          <li>Set up and maintained Jenkins CI/CD pipelines for faster, more reliable deployments.</li>
+          <li>Performed system health checks, log analysis, and P1/P2 incident triage to maintain SLA compliance.</li>
+          <li>Collaborated with dev teams on GitFlow branching, code review gates, and CI/CD quality checks.</li>
+          <li>Containerized applications with Docker and assisted with initial Kubernetes deployment configs.</li>
+          <li>Authored and maintained internal runbooks and incident response documentation.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="divider" id="projects">
+  <div class="wrap">
+    <div class="eyebrow">// BUILDS</div>
+    <h2>Key Projects</h2>
+    <div class="project-grid">
+      <div class="project-card">
+        <div class="project-title">Production-Grade MLOps Pipeline</div>
+        <ul>
+          <li>Designed an end-to-end ML pipeline for customer churn prediction with CI/CD integration, dataset versioning via DVC, and Kubernetes-based model serving.</li>
+          <li>Enabled continuous training and deployment with Argo CD and KServe, cutting deployment cycle time by ~60%.</li>
+        </ul>
+        <div class="project-tags">
+          <span class="tag">Python</span><span class="tag">Docker</span><span class="tag">Kubernetes</span>
+          <span class="tag">Argo CD</span><span class="tag">KServe</span><span class="tag">MLflow</span>
+          <span class="tag">DVC</span><span class="tag">GitHub Actions</span>
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="project-title">Asset Data Collection Platform</div>
+        <ul>
+          <li>Designed and deployed a three-tier microservices architecture (React, Node.js, PostgreSQL) using Docker and Kubernetes.</li>
+          <li>Built Jenkins CI/CD pipelines and Terraform IaC modules for automated infrastructure provisioning.</li>
+          <li>Implemented GitOps with Argo CD and Helm, plus Prometheus/Grafana monitoring and EFK logging.</li>
+        </ul>
+        <div class="project-tags">
+          <span class="tag">AWS EKS</span><span class="tag">Docker</span><span class="tag">Kubernetes</span>
+          <span class="tag">Jenkins</span><span class="tag">Terraform</span><span class="tag">Argo CD</span>
+          <span class="tag">Helm</span><span class="tag">Prometheus</span><span class="tag">Grafana</span>
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="project-title">AWS Cloud Cost Optimization</div>
+        <ul>
+          <li>Rightsized EC2 instances based on utilization metrics, eliminating overprovisioned compute.</li>
+          <li>Wrote a Lambda function to auto-detect and delete stale/orphaned EBS snapshots.</li>
+          <li>Implemented S3 lifecycle policies to transition and expire objects, cutting storage costs.</li>
+        </ul>
+        <div class="project-tags">
+          <span class="tag">EC2</span><span class="tag">Lambda</span><span class="tag">EBS</span>
+          <span class="tag">S3</span><span class="tag">Python</span><span class="tag">CloudWatch</span>
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="project-title">Inventory Management System</div>
+        <ul>
+          <li>Handled deployment of a 4-service polyglot platform: Auth &amp; User services (Java), a Kafka-driven Notification service (Go), and a Data Processing service (Python).</li>
+          <li>Containerized and deployed each service independently, coordinating releases and monitoring across the stack.</li>
+        </ul>
+        <div class="project-tags">
+          <span class="tag">Java</span><span class="tag">Go</span><span class="tag">Python</span>
+          <span class="tag">Kafka</span><span class="tag">Docker</span><span class="tag">Kubernetes</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="education">
+  <div class="wrap">
+    <div class="eyebrow">// EDUCATION</div>
+    <h2>Education</h2>
+    <div class="edu-card">
+      <div>
+        <div class="edu-degree">Bachelor of Engineering — Electronics and Communication Engineering</div>
+        <div class="edu-school">Canara Engineering College</div>
+      </div>
+      <div class="edu-meta">2019 – 2023<br>CGPA: 8.7 / 10.0</div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="eyebrow">// CONNECT</div>
+    <h2>Get in Touch</h2>
+    <p class="lead">Open to QA, DevOps, and cloud infrastructure roles. Reach out any of these ways:</p>
+    <div class="contact-row">
+      <a class="contact-link" href="mailto:savithri62001@gmail.com">savithri62001@gmail.com</a>
+      <a class="contact-link" href="tel:+918197418155">+91-8197418155</a>
+      <a class="contact-link" href="https://github.com/Savithri0608" target="_blank" rel="noopener">github.com/Savithri0608</a>
+      <a class="contact-link" href="https://linkedin.com/in/savithri-marati" target="_blank" rel="noopener">linkedin.com/in/savithri-marati</a>
+    </div>
+    <div class="status-bar">
+      <span>© 2026 Savithri Marati</span>
+      <span>build: stable · uptime: 3y 5m</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Reveal pipeline stages and project cards on scroll
+  const revealTargets = document.querySelectorAll('.stage, .project-card, .skill-mod');
+  revealTargets.forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(14px)';
+    el.style.transition = 'opacity .5s ease, transform .5s ease';
+  });
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  revealTargets.forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
