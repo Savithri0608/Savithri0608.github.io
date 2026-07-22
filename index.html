@@ -301,9 +301,60 @@
     .edu-card{flex-direction:column;}
     .edu-meta{text-align:left;}
   }
+
+  /* ---------- BOOT SCREEN ---------- */
+  #boot-screen{
+    position:fixed; inset:0; z-index:200;
+    background:var(--bg);
+    display:flex; align-items:center; justify-content:center;
+    padding:24px;
+    transition:opacity .5s ease, visibility .5s ease;
+  }
+  #boot-screen.hidden{opacity:0; visibility:hidden; pointer-events:none;}
+  .boot-terminal{
+    font-family:var(--mono); font-size:14px; color:var(--text-dim);
+    max-width:520px; width:100%;
+  }
+  .boot-line{
+    opacity:0; margin-bottom:10px;
+    animation:bootline .4s ease forwards;
+  }
+  .boot-line .ok{color:var(--pass);}
+  .boot-quote{
+    opacity:0; color:var(--accent);
+    margin:20px 0 16px; font-style:normal;
+    line-height:1.6; font-size:14.5px;
+    animation:bootline .6s ease forwards;
+  }
+  .boot-hint{
+    opacity:0; color:var(--text-faint); font-size:12px;
+    animation:bootline .4s ease forwards;
+  }
+  @keyframes bootline{to{opacity:1;}}
+  .dots::after{
+    content:''; animation:dots 1.2s steps(4) infinite;
+  }
+  @keyframes dots{
+    0%{content:'';} 25%{content:'.';} 50%{content:'..';} 75%{content:'...';}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    #boot-screen{display:none;}
+  }
 </style>
 </head>
 <body>
+
+<div id="boot-screen">
+  <div class="boot-terminal">
+    <div class="boot-line" style="animation-delay:.1s">$ booting portfolio<span class="dots"></span></div>
+    <div class="boot-line" style="animation-delay:.4s">$ loading skills ... <span class="ok">done</span></div>
+    <div class="boot-line" style="animation-delay:.7s">$ compiling experience ... <span class="ok">done</span></div>
+    <div class="boot-line" style="animation-delay:1.0s">$ mounting quote.txt</div>
+    <div class="boot-quote" style="animation-delay:1.4s">Hi there 👋 thanks for taking the time to stop by — have a great day!</div>
+    <div class="boot-hint" style="animation-delay:2.0s">press any key, or wait ...</div>
+  </div>
+</div>
 
 <nav>
   <div class="wrap">
@@ -340,6 +391,7 @@
 
     <div class="hero-ctas">
       <a href="#projects" class="btn btn-primary">View Projects</a>
+      <a href="Savithri-Marati-Resume.pdf" download class="btn btn-secondary">↓ Download Resume</a>
       <a href="#contact" class="btn btn-secondary">Get in Touch</a>
     </div>
   </div>
@@ -477,7 +529,7 @@
     <h2>Key Projects</h2>
     <div class="project-grid">
       <div class="project-card">
-        <div class="project-title">Production-Grade MLOps Pipeline</div>
+        <div class="project-title">Attrition Forecaster</div>
         <ul>
           <li>Designed an end-to-end ML pipeline for customer churn prediction with CI/CD integration, dataset versioning via DVC, and Kubernetes-based model serving.</li>
           <li>Enabled continuous training and deployment with Argo CD and KServe, cutting deployment cycle time by ~60%.</li>
@@ -546,12 +598,13 @@
   <div class="wrap">
     <div class="eyebrow">// CONNECT</div>
     <h2>Get in Touch</h2>
-    <p class="lead">Open to QA, DevOps, and cloud infrastructure roles. Reach out any of these ways:</p>
+    <p class="lead">Open to Cloud, DevOps, Site Reliability, Platform Engineer, or QA roles. Reach out any of these ways:</p>
     <div class="contact-row">
       <a class="contact-link" href="mailto:savithri62001@gmail.com">savithri62001@gmail.com</a>
       <a class="contact-link" href="tel:+918197418155">+91-8197418155</a>
       <a class="contact-link" href="https://github.com/Savithri0608" target="_blank" rel="noopener">github.com/Savithri0608</a>
       <a class="contact-link" href="https://linkedin.com/in/savithri-marati" target="_blank" rel="noopener">linkedin.com/in/savithri-marati</a>
+      <a class="contact-link" href="Savithri-Marati-Resume.pdf" download>↓ Download Resume</a>
     </div>
     <div class="status-bar">
       <span>© 2026 Savithri Marati</span>
@@ -559,6 +612,22 @@
     </div>
   </div>
 </footer>
+
+<script>
+  // Boot screen: dismiss on click, keypress, or after ~3.4s
+  (function(){
+    const boot = document.getElementById('boot-screen');
+    let dismissed = false;
+    function dismiss(){
+      if (dismissed) return;
+      dismissed = true;
+      boot.classList.add('hidden');
+    }
+    document.addEventListener('click', dismiss);
+    document.addEventListener('keydown', dismiss);
+    setTimeout(dismiss, 2500);
+  })();
+</script>
 
 <script>
   // Reveal pipeline stages and project cards on scroll
