@@ -25,7 +25,7 @@ nav .wrap{display:flex;align-items:center;justify-content:space-between;min-heig
 .nav-links a{font-family:var(--mono);font-size:12.5px;color:var(--text-dim);transition:color .15s}
 .nav-links a:hover{color:var(--accent)}
 .hero{padding:88px 0 64px;border-bottom:1px solid var(--border-soft)}
-.status-line{display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:12px;color:var(--pass);margin-bottom:28px;letter-spacing:.03em}
+.status-line{display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:12px;color:var(--text-dim);margin-bottom:28px;letter-spacing:.03em}
 .dot{width:7px;height:7px;border-radius:50%;background:var(--pass);animation:pulse 2s infinite}
 @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(63,185,80,.5)}70%{box-shadow:0 0 0 8px rgba(63,185,80,0)}100%{box-shadow:0 0 0 0 rgba(63,185,80,0)}}
 .hero h1{font-weight:700;font-size:clamp(32px,5vw,46px);letter-spacing:-.01em;margin-bottom:8px}
@@ -37,6 +37,7 @@ nav .wrap{display:flex;align-items:center;justify-content:space-between;min-heig
 .terminal-body .line{opacity:0;transform:translateY(4px);animation:tline .5s ease forwards;margin-bottom:10px}
 .terminal-body .line:nth-child(1){animation-delay:.1s}.terminal-body .line:nth-child(2){animation-delay:.5s}.terminal-body .line:nth-child(3){animation-delay:.9s}.terminal-body .line:nth-child(4){animation-delay:1.3s}.terminal-body .line:nth-child(5){animation-delay:1.7s}.terminal-body .line:nth-child(6){animation-delay:2.1s}.terminal-body .line:nth-child(7){animation-delay:2.5s}
 @keyframes tline{to{opacity:1;transform:none}}
+.joiner{color:var(--pass);font-weight:600}
 .prompt{color:var(--accent)}.out{color:var(--text)}
 .cursor{display:inline-block;width:8px;height:15px;background:var(--accent);vertical-align:middle;animation:blink 1s step-end infinite;margin-left:2px}
 @keyframes blink{50%{opacity:0}}
@@ -124,7 +125,7 @@ footer{padding:64px 0 40px}
 
 <header class="hero">
   <div class="wrap">
-    <div class="status-line"><span class="dot"></span> STATUS: OPEN TO OPPORTUNITIES</div>
+    <div class="status-line"><span class="dot"></span> STATUS: OPEN TO OPPORTUNITIES · <span class="joiner">IMMEDIATE JOINER</span></div>
     <h1>Savithri Marati</h1>
     <div class="role">DevOps · Cloud · SRE Engineer (AWS) — with a QA foundation</div>
     <div class="terminal">
@@ -136,7 +137,7 @@ footer{padding:64px 0 40px}
         <div class="line"><span class="out">&gt; cloud_cost_reduction ..... 20%</span></div>
         <div class="line"><span class="out">&gt; mlops_cycle_time_cut ..... 60%</span></div>
         <div class="line"><span class="out">&gt; pipelines_owned .......... Jenkins, GitHub Actions, Argo CD</span></div>
-        <div class="line"><span class="out">&gt; ready_for_next_role ...... true<span class="cursor"></span></span></div>
+        <div class="line"><span class="out">&gt; availability ............ <span class="joiner">immediate joiner</span><span class="cursor"></span></span></div>
       </div>
     </div>
     <div class="hero-ctas">
@@ -253,7 +254,7 @@ footer{padding:64px 0 40px}
   <div class="wrap">
     <div class="eyebrow">// CONNECT</div>
     <h2>Get in Touch</h2>
-    <p class="lead">Open to Cloud, DevOps, Site Reliability, Platform Engineer, or QA roles. Reach out any of these ways:</p>
+    <p class="lead"><span class="joiner">Immediate joiner</span>, open to Cloud, DevOps, Site Reliability, Platform Engineer, or QA roles. Reach out any of these ways:</p>
     <div class="contact-row">
       <a class="contact-link" href="mailto:savithri62001@gmail.com">savithri62001@gmail.com</a>
       <a class="contact-link" href="tel:+918197418155">+91-8197418155</a>
